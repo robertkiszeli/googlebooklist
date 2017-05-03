@@ -1,65 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
     tools:context="com.robertkiszelirk.googlebooksearch.MainActivity">
 
     <LinearLayout
         android:id="@+id/main_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_margin="@dimen/landscape_layout_margin">
+        android:layout_margin="@dimen/landscape_layout_margin"
+        android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="@dimen/google_image_height"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/google_image_margin"
+            android:layout_weight="1"
             android:background="@drawable/googlebooks"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/search_field"
                 android:layout_width="@dimen/search_edit_text_width"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/search_edit_text_margin"
                 android:layout_gravity="center"
+                android:layout_margin="@dimen/search_edit_text_margin"
                 android:gravity="center_horizontal"
-                android:textSize="@dimen/base_text_size"
-                android:textColor="@color/colorTextPrimary"
-                android:maxLines="1"
+                android:imeOptions="actionDone"
                 android:inputType="text"
-                android:imeOptions="actionDone"/>
+                android:maxLines="1"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/base_text_size" />
 
             <RadioGroup
                 android:id="@+id/radio_group_search_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal">
+
                 <RadioButton
                     android:id="@+id/search_all"
                     style="@style/radio_button"
-                    android:text="@string/search_all"/>
+                    android:text="@string/search_all" />
+
                 <RadioButton
                     android:id="@+id/search_title"
                     style="@style/radio_button"
-                    android:text="@string/search_in_title"/>
+                    android:text="@string/search_in_title" />
+
                 <RadioButton
                     android:id="@+id/search_author"
                     style="@style/radio_button"
-                    android:text="@string/search_for_author"/>
+                    android:text="@string/search_for_author" />
             </RadioGroup>
 
             <android.support.v7.widget.AppCompatButton
@@ -67,10 +69,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/search_button_margin_top"
-                android:textSize="@dimen/base_text_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:text="@string/search"
                 android:textColor="@color/colorTextPrimary"
-                android:background="?attr/selectableItemBackgroundBorderless"/>
+                android:textSize="@dimen/base_text_size" />
 
         </LinearLayout>
     </LinearLayout>
@@ -79,9 +81,10 @@
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
+
         <ProgressBar
             android:layout_width="@dimen/progress_bar_width"
             android:layout_height="@dimen/progress_bar_height" />
@@ -94,6 +97,6 @@
         android:gravity="center"
         android:text="@string/no_internet_connection"
         android:textSize="@dimen/internet_text_size"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>
