@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_image_width">120dp</dimen>
+    <dimen name="list_item_image_height">160dp</dimen>
+    <dimen name="list_item_image_margin">10dp</dimen>
+    <dimen name="list_item_text_layout_margin">10dp</dimen>
+    <dimen name="list_item_margin">10dp</dimen>
+    <dimen name="list_item_elevation">6dp</dimen>
+    <dimen name="google_image_width">300dp</dimen>
+    <dimen name="google_image_height">240dp</dimen>
+    <dimen name="google_image_margin">20dp</dimen>
+    <dimen name="search_edit_text_width">200dp</dimen>
+    <dimen name="search_edit_text_margin">10dp</dimen>
+    <dimen name="base_text_size">16sp</dimen>
+    <dimen name="search_button_margin_top">20dp</dimen>
+    <dimen name="progress_bar_width">100dp</dimen>
+    <dimen name="progress_bar_height">100dp</dimen>
+    <dimen name="internet_text_size">24sp</dimen>
+    <dimen name="landscape_layout_margin">20dp</dimen>
+</resources>

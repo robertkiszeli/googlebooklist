@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryLight"
+    tools:context="com.robertkiszelirk.googlebooksearch.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/landscape_layout_margin">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/google_image_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/google_image_margin"
+            android:background="@drawable/googlebooks"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/search_field"
+                android:layout_width="@dimen/search_edit_text_width"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/search_edit_text_margin"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/base_text_size"
+                android:textColor="@color/colorTextPrimary"
+                android:maxLines="1"
+                android:inputType="text"
+                android:imeOptions="actionDone"/>
+
+            <RadioGroup
+                android:id="@+id/radio_group_search_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <RadioButton
+                    android:id="@+id/search_all"
+                    style="@style/radio_button"
+                    android:text="@string/search_all"/>
+                <RadioButton
+                    android:id="@+id/search_title"
+                    style="@style/radio_button"
+                    android:text="@string/search_in_title"/>
+                <RadioButton
+                    android:id="@+id/search_author"
+                    style="@style/radio_button"
+                    android:text="@string/search_for_author"/>
+            </RadioGroup>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/book_search_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/search_button_margin_top"
+                android:textSize="@dimen/base_text_size"
+                android:text="@string/search"
+                android:textColor="@color/colorTextPrimary"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="@dimen/progress_bar_width"
+            android:layout_height="@dimen/progress_bar_height" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/no_internet_connection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_internet_connection"
+        android:textSize="@dimen/internet_text_size"
+        android:visibility="gone"/>
+
+</LinearLayout>

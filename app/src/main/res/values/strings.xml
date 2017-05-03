@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Google Book Search</string>
+    <string name="main_url">https://www.googleapis.com/books/v1/volumes?q=</string>
+    <string name="in_title">intitle:</string>
+    <string name="in_author">inauthor:</string>
+    <string name="empty_search_field">Search field is empty!</string>
+    <string name="empty_search">No result for your search!</string>
+    <string name="total_items">totalItems</string>
+    <string name="items">items</string>
+    <string name="volume_info">volumeInfo</string>
+    <string name="authors">authors</string>
+    <string name="title">title</string>
+    <string name="publish_date">publishedDate</string>
+    <string name="image_links">imageLinks</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="book_link">canonicalVolumeLink</string>
+    <string name="json_error">Problem parsing the JSON file</string>
+    <string name="search">Search</string>
+    <string name="no_internet_connection">NO INTERNET CONNECTION</string>
+    <string name="search_all">Search all</string>
+    <string name="search_in_title">Search in title</string>
+    <string name="search_for_author">Search for author</string>
+    <string name="error_response">Error response code:</string>
+    <string name="problem_retrieving_json">Problem retrieving JSON data.</string>
+    <string name="i_o_exception">I/O exception occurred</string>
+</resources>
