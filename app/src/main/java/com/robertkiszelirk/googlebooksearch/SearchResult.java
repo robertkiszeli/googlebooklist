@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +25,7 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.search_result_activity);
         // Set list view list
         ListView searchResultList = (ListView) findViewById(R.id.search_result_list);
+        searchResultList.setVisibility(View.VISIBLE);
         // Extract books from json
         final ArrayList<Book> booksList = extractBooksFromJson(getIntent().getStringExtra("json"));
         // If has book
@@ -44,7 +45,8 @@ public class SearchResult extends AppCompatActivity {
             });
         }else{
             // If there is no book
-            Toast.makeText(this, R.string.empty_search, Toast.LENGTH_SHORT).show();
+            TextView noResult = (TextView) findViewById(R.id.empty_search_result);
+            noResult.setVisibility(View.VISIBLE);
         }
     }
 

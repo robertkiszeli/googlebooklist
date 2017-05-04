@@ -17,4 +17,7 @@
     <dimen name="progress_bar_height">100dp</dimen>
     <dimen name="internet_text_size">24sp</dimen>
     <dimen name="landscape_layout_margin">20dp</dimen>
+    <dimen name="search_result_list_view_margin">10dp</dimen>
+    <dimen name="search_result_list_view_divider_height">10dp</dimen>
+    <dimen name="empty_search_result_text_size">24sp</dimen>
 </resources>
