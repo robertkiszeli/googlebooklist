@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout progressBar;
     private TextView no_connection;
 
+    private boolean firstStart = true;
+
+    ConnectivityManager cm;
+    NetworkInfo activeNetwork;
+    boolean isConnected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,48 +42,57 @@ public class MainActivity extends AppCompatActivity {
         mainScreen = (LinearLayout) findViewById(R.id.main_screen);
         progressBar = (LinearLayout) findViewById(R.id.progress_bar);
         no_connection = (TextView) findViewById(R.id.no_internet_connection);
+        // Set edit text
+        searchField = (EditText) findViewById(R.id.search_field);
+        // Set base radio button selection
+        RadioButton searchAll = (RadioButton) findViewById(R.id.search_all);
+        searchAll.setChecked(true);
+        searchIn = (RadioGroup) findViewById(R.id.radio_group_search_in);
         // Check internet connection
-        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        final boolean  isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        activeNetwork = cm.getActiveNetworkInfo();
+        isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         // If it has internet connection
         if(isConnected) {
-            // Set edit text
-            searchField = (EditText) findViewById(R.id.search_field);
-            // Set base radio button selection
-            RadioButton searchAll = (RadioButton) findViewById(R.id.search_all);
-            searchAll.setChecked(true);
-            searchIn = (RadioGroup) findViewById(R.id.radio_group_search_in);
             // Set search button
             Button bookSearchButton = (Button) findViewById(R.id.book_search_button);
             bookSearchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Main url for query
-                    String urlString = getString(R.string.main_url);
-                    // Handle radio button selection
-                    if (searchField.getText().toString().trim().length() > 0) {
-                        switch (searchIn.getCheckedRadioButtonId()) {
-                            case R.id.search_all:
-                                urlString = urlString + searchField.getText().toString().trim().replace(" ", "+");
-                                break;
-                            case R.id.search_title:
-                                urlString = urlString + getString(R.string.in_title) + searchField.getText().toString().trim().replace(" ", "+");
-                                break;
-                            case R.id.search_author:
-                                urlString = urlString + getString(R.string.in_author) + searchField.getText().toString().trim().replace(" ", "+");
-                                break;
+                    // Check internet connection
+                    cm = (ConnectivityManager)getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    activeNetwork = cm.getActiveNetworkInfo();
+                    isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+                    if(isConnected) {
+                        // Main url for query
+                        String urlString = getString(R.string.main_url);
+                        // Handle radio button selection
+                        if (searchField.getText().toString().trim().length() > 0) {
+                            switch (searchIn.getCheckedRadioButtonId()) {
+                                case R.id.search_all:
+                                    urlString = urlString + searchField.getText().toString().trim().replace(" ", "+");
+                                    break;
+                                case R.id.search_title:
+                                    urlString = urlString + getString(R.string.in_title) + searchField.getText().toString().trim().replace(" ", "+");
+                                    break;
+                                case R.id.search_author:
+                                    urlString = urlString + getString(R.string.in_author) + searchField.getText().toString().trim().replace(" ", "+");
+                                    break;
+                            }
+                            // Set load view
+                            mainScreen.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.VISIBLE);
+                            // Get json file
+                            URL url = createUrl(urlString);
+                            GetJson getJson = new GetJson(MainActivity.this, url);
+                            getJson.execute();
+                        } else {
+                            // Handle empty edit text
+                            Toast.makeText(MainActivity.this, R.string.empty_search_field, Toast.LENGTH_LONG).show();
                         }
-                        // Set load view
-                        mainScreen.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        // Get json file
-                        URL url = createUrl(urlString);
-                        GetJson getJson = new GetJson(MainActivity.this, url);
-                        getJson.execute();
-                    } else {
-                        // Handle empty edit text
-                        Toast.makeText(MainActivity.this, R.string.empty_search_field, Toast.LENGTH_LONG).show();
+                    }else{
+                        // Handle missed internet connection
+                        Toast.makeText(MainActivity.this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -105,8 +120,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mainScreen.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
-        no_connection.setVisibility(View.GONE);
+        if(!firstStart) {
+            mainScreen.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            no_connection.setVisibility(View.GONE);
+        }
+        firstStart = false;
     }
 }

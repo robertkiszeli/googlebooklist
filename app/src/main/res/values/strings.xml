@@ -23,5 +23,5 @@
     <string name="error_response">Error response code:</string>
     <string name="problem_retrieving_json">Problem retrieving JSON data.</string>
     <string name="i_o_exception">I/O exception occurred</string>
-    <string name="no_result_for_your_search">No result for your search!</string>
+    <string name="no_result_for_your_search">No result for your search!\nHit back and try again.</string>
 </resources>
