@@ -49,21 +49,21 @@ public class MainActivity extends AppCompatActivity {
         searchAll.setChecked(true);
         searchIn = (RadioGroup) findViewById(R.id.radio_group_search_in);
         // Check internet connection
-        cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         activeNetwork = cm.getActiveNetworkInfo();
         isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         // If it has internet connection
-        if(isConnected) {
+        if (isConnected) {
             // Set search button
             Button bookSearchButton = (Button) findViewById(R.id.book_search_button);
             bookSearchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Check internet connection
-                    cm = (ConnectivityManager)getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    cm = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                     activeNetwork = cm.getActiveNetworkInfo();
                     isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-                    if(isConnected) {
+                    if (isConnected) {
                         // Main url for query
                         String urlString = getString(R.string.main_url);
                         // Handle radio button selection
@@ -90,28 +90,29 @@ public class MainActivity extends AppCompatActivity {
                             // Handle empty edit text
                             Toast.makeText(MainActivity.this, R.string.empty_search_field, Toast.LENGTH_LONG).show();
                         }
-                    }else{
+                    } else {
                         // Handle missed internet connection
                         Toast.makeText(MainActivity.this, R.string.no_internet_connection, Toast.LENGTH_LONG).show();
                     }
                 }
             });
 
-        }else{
+        } else {
             // Warning for missing internet connection
             mainScreen.setVisibility(View.GONE);
             no_connection.setVisibility(View.VISIBLE);
         }
     }
+
     // Create URL
     private static URL createUrl(String urlString) {
         // Base URL
         URL url = null;
         // Try create URL check format
-        try{
+        try {
             url = new URL(urlString);
-        }catch(MalformedURLException e){
-            Log.e(LOG_TAG,"Problem building URL", e);
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Problem building URL", e);
         }
         // Return URL
         return url;
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!firstStart) {
+        if (!firstStart) {
             mainScreen.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             no_connection.setVisibility(View.GONE);

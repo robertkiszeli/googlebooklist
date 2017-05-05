@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class SearchResult extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class SearchResult extends AppCompatActivity {
         // Extract books from json
         final ArrayList<Book> booksList = extractBooksFromJson(getIntent().getStringExtra("json"));
         // If has book
-        if(booksList != null) {
+        if (booksList != null) {
             // Create book adapter
             BookAdapter bookAdapter = new BookAdapter(getBaseContext(), booksList);
             // Populate list view
@@ -43,7 +45,7 @@ public class SearchResult extends AppCompatActivity {
                     startActivity(i);
                 }
             });
-        }else{
+        } else {
             // If there is no book
             TextView noResult = (TextView) findViewById(R.id.empty_search_result);
             noResult.setVisibility(View.VISIBLE);
@@ -53,19 +55,21 @@ public class SearchResult extends AppCompatActivity {
     private ArrayList<Book> extractBooksFromJson(String json) {
         // Books List
         ArrayList<Book> booksJsonList = new ArrayList<>();
-        try{
+        try {
             JSONObject mainJsonObject = new JSONObject(json);
             // Check if it has books
             int totalItems = mainJsonObject.getInt(getString(R.string.total_items));
-            if(totalItems == 0){return null;}
+            if (totalItems == 0) {
+                return null;
+            }
 
             JSONArray bookItems = mainJsonObject.getJSONArray(getString(R.string.items));
             // Get books
-            for(int i = 0; i < bookItems.length(); i++){
+            for (int i = 0; i < bookItems.length(); i++) {
                 JSONObject volumeInfo = bookItems.getJSONObject(i).getJSONObject(getString(R.string.volume_info));
                 ArrayList<String> bookAuthors = new ArrayList<>();
                 // Check if volumeInfo has authors
-                if(volumeInfo.has(getString(R.string.authors))) {
+                if (volumeInfo.has(getString(R.string.authors))) {
                     JSONArray authors = volumeInfo.getJSONArray(getString(R.string.authors));
                     for (int j = 0; j < authors.length(); j++) {
                         bookAuthors.add(authors.get(j).toString());
@@ -77,24 +81,24 @@ public class SearchResult extends AppCompatActivity {
                 String bookPublishedDate = volumeInfo.getString(getString(R.string.publish_date));
                 // Get image link
                 String bookThumbnail;
-                if(volumeInfo.has(getString(R.string.image_links))){
+                if (volumeInfo.has(getString(R.string.image_links))) {
                     bookThumbnail = volumeInfo.getJSONObject(getString(R.string.image_links)).getString(getString(R.string.thumbnail));
-                }else{
+                } else {
                     bookThumbnail = null;
                 }
                 // Get book link
                 String bookLink;
-                if(volumeInfo.has(getString(R.string.book_link))){
+                if (volumeInfo.has(getString(R.string.book_link))) {
                     bookLink = volumeInfo.getString(getString(R.string.book_link));
-                }else{
+                } else {
                     bookLink = null;
                 }
                 // Create and add current book
-                Book book = new Book(bookAuthors,bookTitle,bookPublishedDate,bookThumbnail,bookLink);
+                Book book = new Book(bookAuthors, bookTitle, bookPublishedDate, bookThumbnail, bookLink);
                 booksJsonList.add(book);
             }
-        }catch(JSONException e){
-            Log.e(LOG_TAG,getString(R.string.json_error),e);
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, getString(R.string.json_error), e);
         }
         return booksJsonList;
     }
